@@ -24,10 +24,12 @@ async def google_login():
 async def google_callback(request: Request):
     async with google_sso:
         user = await google_sso.verify_and_process(request)
+    if user.email not in users_db:
+        users_db[user.email] = {
+            "email": user.email,
+            "password_hash": None,
+            "avatar": user.avatar,
+            "provider": "google"
+        }
     
-    if not user:
-        raise HTTPException(status_code=400, detail="Failed to login with Google")
-    access_token = createAccessToken(data={"sub": user.email})
-    
-    return {"access_token": access_token, "token_type": "bearer"}
-
+    return {"access_token": createAccessToken({"sub": user.email})}
