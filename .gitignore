@@ -1,0 +1,21 @@
+# Environment Variables
+.env
+
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Frontend
+frontend/package.json
+
+# Backend (Python)
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+*.egg-info/
+
+# User specified paths
+scripts/
+packages/
