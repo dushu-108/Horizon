@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 HF_TOKEN = os.getenv("HUGGING_FACE_TOKEN") 
-API_URL = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-Krea-dev"
+API_URL = "https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell"
 
 def generate_image(prompt: str):
     headers = {"Authorization": f"Bearer {HF_TOKEN}"}
