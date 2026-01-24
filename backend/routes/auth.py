@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
-from schema.user import Token, UserCreate, UserLogin
+from schema.user import Token, UserCreate, UserLogin, UserResponse
 from auth import createAccessToken, verifyPassword, hashPassword
 from models.user import User
 from sqlalchemy.orm import Session
@@ -19,7 +19,7 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     access_token = createAccessToken(data={"sub": db_user.email})
     return {"access_token": access_token, "token_type": "bearer"}
 
-@router.post("/register", response_model=User)
+@router.post("/register", response_model=UserResponse)
 def register(user : UserCreate, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.email == user.email).first()
     if db_user:

@@ -1,13 +1,16 @@
 from fastapi import FastAPI
-from database import engine
-from models import Base
-from routes import auth_router, google_auth_router
+from database import engine, Base
+from models import user, logo
+from routes import auth, googleAuth
 
 app = FastAPI()
 
 Base.metadata.create_all(bind=engine)
 
-app.include_router(auth_router)
-app.include_router(google_auth_router)
+app.include_router(auth.router)
+app.include_router(googleAuth.router)
 
+@app.get("/")
+def root():
+    return {"message": "Welcome to the Horizon API"}
 

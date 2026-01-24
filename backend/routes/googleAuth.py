@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, RedirectResponse
+from fastapi import APIRouter, Depends
+from fastapi.responses import RedirectResponse
 from starlette.requests import Request
 from fastapi_sso.sso.google import GoogleSSO
 import os
