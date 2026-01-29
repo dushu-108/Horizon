@@ -1,9 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setImage } from "../../redux/features/dataSlice";
+import { setImage } from "../../redux/features/logoSlice";
+import generateImage from "../../api/imageApi";
 
 const ResultStep = () => {
-    const { image } = useSelector((state) => state.data);    
+    const { image } = useSelector((state) => state.logo);    
     const dispatch = useDispatch();
+
+    const generateLogo = async () => {
+      try {
+        const { title, desc, palette, style } = useSelector((state) => state.data);
+        const response = await generateImage(title, desc, palette, style);
+        dispatch(setImage(response));
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
   return (
     <div className="flex flex-col items-center">
@@ -12,8 +23,7 @@ const ResultStep = () => {
         <img src={image} alt="Generated Logo" className="w-[400px] h-[400px] object-cover rounded-lg" />
       </div>
       <div className="flex gap-4">
-        <button onClick={() => dispatch(setImage(null))} className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 font-bold">Download Logo</button>
-        <button onClick={() => dispatch(setImage(null))} className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50">Generate New</button>
+        <button onClick={() => generateLogo()} className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 font-bold">Generate New</button>
       </div>
     </div>
   );
