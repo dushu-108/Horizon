@@ -19,10 +19,8 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await loginWithEmail(email, password);
-            // The backend returns { access_token: "...", token_type: "bearer" }
             const token = response.data.access_token;
 
-            // Should fetch user details here, but for now using email as name or placeholder
             const user = { name: email, email: email };
 
             dispatch(login({ user, token }));
