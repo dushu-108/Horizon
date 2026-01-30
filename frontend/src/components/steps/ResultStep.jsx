@@ -3,18 +3,19 @@ import { setImage } from "../../redux/features/logoSlice";
 import generateImage from "../../api/imageApi";
 
 const ResultStep = () => {
-    const { image } = useSelector((state) => state.logo);    
-    const dispatch = useDispatch();
+  const { image } = useSelector((state) => state.logo);
+  const { title, desc, palette, style } = useSelector((state) => state.data);
+  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-    const generateLogo = async () => {
-      try {
-        const { title, desc, palette, style } = useSelector((state) => state.data);
-        const response = await generateImage(title, desc, palette, style);
-        dispatch(setImage(response));
-      } catch (error) {
-        console.error(error);
-      }
+  const generateLogo = async () => {
+    try {
+      const response = await generateImage(title, desc, palette, style, token);
+      dispatch(setImage(response.image));
+    } catch (error) {
+      console.error(error);
     }
+  }
 
   return (
     <div className="flex flex-col items-center">

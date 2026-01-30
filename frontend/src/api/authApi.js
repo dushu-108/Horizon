@@ -1,16 +1,15 @@
 import axios from "axios";
 
 export async function loginWithEmail(email, password) {
-    const formData = new FormData();
-    formData.append("username", email);
-    formData.append("password", password);
-
-    const response = await axios.post("http://localhost:8000/auth/login", formData, {
+    const response = await axios.post("http://localhost:8000/auth/login", {
+        email: email,
+        password: password
+    }, {
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
         }
     });
-    
+
     return response;
 }
 
