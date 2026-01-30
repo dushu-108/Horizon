@@ -10,8 +10,11 @@ const LoginSuccess = () => {
 
     useEffect(() => {
         const token = searchParams.get("token");
+        const avatar = searchParams.get("avatar");
+        const name = searchParams.get("name");
+
         if (token) {
-            dispatch(login({ token, user: { name: "User" } }));
+            dispatch(login({ token, user: { name, avatar } }));
             navigate("/dashboard");
         } else {
             navigate("/login");
