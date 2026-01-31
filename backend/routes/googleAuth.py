@@ -47,7 +47,6 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
     
     access_token = createAccessToken({"sub": user.email})
 
-    # Use environment variable for frontend URL or default to localhost
-    frontend_base_url = os.getenv("FRONTEND_URL", "http://localhost:5173")
+    frontend_base_url = "http://localhost:5173"
     frontend_url = f"{frontend_base_url}/login-success?token={access_token}&avatar={user.picture}&name={user.display_name}&email={user.email}"
     return RedirectResponse(url=frontend_url)
