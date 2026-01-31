@@ -19,6 +19,7 @@ router = APIRouter(
 CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
 REDIRECT_URI = os.getenv("GOOGLE_REDIRECT_URI")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
 
 @router.get("/login")
 async def google_login():
@@ -47,7 +48,6 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
     
     access_token = createAccessToken({"sub": user.email})
 
-    frontend_base_url = "http://localhost:5173"
-    frontend_url = f"{frontend_base_url}/login-success?token={access_token}&avatar={user.picture}&name={user.display_name}&email={user.email}"
+    frontend_url = f"{FRONTEND_URL}/login-success?token={access_token}&avatar={user.picture}&name={user.display_name}&email={user.email}"
     return RedirectResponse(url=frontend_url)
     

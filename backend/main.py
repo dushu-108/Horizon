@@ -3,14 +3,21 @@ from fastapi.middleware.cors import CORSMiddleware
 from database import engine, Base
 from models import user, logo
 from routes import auth, googleAuth, logo
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
+
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173",
-        "*"  # You can replace this with your specific frontend domain for better security
+        FRONTEND_URL,
+        "http://localhost:5173",  
+        "*"
     ],
     allow_credentials=True,
     allow_methods=["*"],
