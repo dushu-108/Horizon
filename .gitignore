@@ -5,9 +5,6 @@
 node_modules/
 frontend/node_modules/
 
-# Frontend
-frontend/package.json
-frontend/package-lock.json
 
 # Backend (Python)
 __pycache__/
