@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerWithEmail } from '../api/authApi';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
+
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
 
   const handleGoogleLogin = () => {
-    window.location.href = "https://horizon-di3m.onrender.com/auth/google/login";
+    window.location.href = `${BACKEND_URL}/auth/google/login`;
   };
 
   const handleSubmit = async (e) => {

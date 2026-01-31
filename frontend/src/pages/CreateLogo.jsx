@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import generateImage from '../api/imageApi';
 import { setImage } from '../redux/features/logoSlice';
-import TitleStep from '../components/Steps/TitleStep';
-import DescStep from '../components/Steps/DescStep';
-import PaletteStep from '../components/Steps/PaletteStep';
-import StyleStep from '../components/Steps/StyleStep';
-import LoadingStep from '../components/Steps/LoadingStep';
-import ResultStep from '../components/Steps/ResultStep';
+import TitleStep from '../components/steps/TitleStep';
+import DescStep from '../components/steps/DescStep';
+import PaletteStep from '../components/steps/PaletteStep';
+import StyleStep from '../components/steps/StyleStep';
+import LoadingStep from '../components/steps/LoadingStep';
+import ResultStep from '../components/steps/ResultStep';
 
 const CreateLogo = () => {
     const [step, setStep] = useState(1);

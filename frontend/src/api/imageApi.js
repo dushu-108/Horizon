@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
+
 export default async function generateImage(title, desc, palette, style, token) {
-    const response = await axios.post('https://horizon-di3m.onrender.com/logo/', {
+    const response = await axios.post(`${BACKEND_URL}/logo/`, {
         title,
         desc,
         palette,
@@ -15,7 +17,7 @@ export default async function generateImage(title, desc, palette, style, token) 
 }
 
 export const fetchLogos = async (token) => {
-    const response = await axios.get('https://horizon-di3m.onrender.com/logo/', {
+    const response = await axios.get(`${BACKEND_URL}/logo/`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -24,7 +26,7 @@ export const fetchLogos = async (token) => {
 }
 
 export const deleteLogo = async (id, token) => {
-    const response = await axios.delete(`https://horizon-di3m.onrender.com/logo/${id}`, {
+    const response = await axios.delete(`${BACKEND_URL}/logo/${id}`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
