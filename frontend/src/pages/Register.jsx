@@ -7,7 +7,7 @@ const Register = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8000/auth/google/login";
+    window.location.href = "https://horizon-di3m.onrender.com/auth/google/login";
   };
 
   const handleSubmit = async (e) => {

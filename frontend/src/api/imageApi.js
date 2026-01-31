@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default async function generateImage(title, desc, palette, style, token) {
-    const response = await axios.post('http://localhost:8000/logo/', {
+    const response = await axios.post('https://horizon-di3m.onrender.com/logo/', {
         title,
         desc,
         palette,
@@ -15,7 +15,7 @@ export default async function generateImage(title, desc, palette, style, token) 
 }
 
 export const fetchLogos = async (token) => {
-    const response = await axios.get('http://localhost:8000/logo/', {
+    const response = await axios.get('https://horizon-di3m.onrender.com/logo/', {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -24,7 +24,7 @@ export const fetchLogos = async (token) => {
 }
 
 export const deleteLogo = async (id, token) => {
-    const response = await axios.delete(`http://localhost:8000/logo/${id}`, {
+    const response = await axios.delete(`https://horizon-di3m.onrender.com/logo/${id}`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }

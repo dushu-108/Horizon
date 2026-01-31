@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function loginWithEmail(email, password, avatar) {
-    const response = await axios.post("http://localhost:8000/auth/login", {
+    const response = await axios.post("https://horizon-di3m.onrender.com/auth/login", {
         email: email,
         password: password,
         avatar: avatar
@@ -15,7 +15,7 @@ export async function loginWithEmail(email, password, avatar) {
 }
 
 export async function registerWithEmail(name, email, password) {
-    const response = await axios.post("http://localhost:8000/auth/register", {
+    const response = await axios.post("https://horizon-di3m.onrender.com/auth/register", {
         name: name,
         email: email,
         password: password,
@@ -29,7 +29,7 @@ export async function registerWithEmail(name, email, password) {
 
 export async function updateProfile(name, password, avatar) {
     const token = localStorage.getItem("token");
-    const response = await axios.put("http://localhost:8000/auth/update", {
+    const response = await axios.put("https://horizon-di3m.onrender.com/auth/update", {
         name: name,
         password: password,
         avatar: avatar
@@ -44,7 +44,7 @@ export async function updateProfile(name, password, avatar) {
 
 export async function deleteProfile() {
     const token = localStorage.getItem("token");
-    const response = await axios.delete("http://localhost:8000/auth/delete", {
+    const response = await axios.delete("https://horizon-di3m.onrender.com/auth/delete", {
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
@@ -54,5 +54,5 @@ export async function deleteProfile() {
 }
 
 export function loginWithGoogle() {
-    window.location.href = "http://localhost:8000/auth/google/login";
+    window.location.href = "https://horizon-di3m.onrender.com/auth/google/login";
 }
