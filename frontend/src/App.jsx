@@ -6,6 +6,7 @@ import CreateLogo from './pages/CreateLogo';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import LoginSuccess from './pages/LoginSuccess';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/create" element={<CreateLogo />} />
           <Route path="/login-success" element={<LoginSuccess />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>

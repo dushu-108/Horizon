@@ -29,6 +29,15 @@ const Dashboard = () => {
     }
   }
 
+  const handleDownload = (logo) => {
+    const link = document.createElement("a");
+    link.href = logo.image;
+    link.download = `Horizon_Logo_${logo.title}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   return (
     <div className="p-8 md:p-12">
       <div className="flex justify-between items-center mb-8">
@@ -43,7 +52,7 @@ const Dashboard = () => {
               <h3 className="font-bold text-lg mb-1">{logo.title || "Untitled"}</h3>
               <p className="text-xs text-gray-500 mb-2 truncate">{logo.description}</p>
               <div className="flex gap-2">
-                <button className="text-indigo-600 text-sm font-medium">Download</button>
+                <button onClick={() => handleDownload(logo)} className="text-indigo-600 text-sm font-medium">Download</button>
                 <button onClick={() => handleDelete(logo.id)} className="text-red-500 text-sm font-medium">Delete</button>
               </div>
             </div>

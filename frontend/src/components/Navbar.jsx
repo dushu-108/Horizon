@@ -26,9 +26,8 @@ const Navbar = () => {
         <img
           src="horizon.svg"
           alt="logo"
-          className="h-full w-auto object-contain"
-          height={100}
-          width={150}
+          className="object-contain transition-all duration-300"
+          style={{ height: '200px', width: '300px' }}
         />
       </Link>
 
@@ -48,7 +47,7 @@ const Navbar = () => {
                 className="focus:outline-none flex items-center"
               >
                 <img
-                  src={avatar || "https://via.placeholder.com/150"}
+                  src={avatar}
                   alt="profile"
                   className="w-10 h-10 rounded-full border border-gray-200 hover:border-indigo-600 transition cursor-pointer object-cover"
                 />

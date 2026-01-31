@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { registerWithEmail } from '../api/authApi';
 
 const Register = () => {
-  const [formData, setFormData] = useState({email: '', password: '' });
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
 
   const handleGoogleLogin = () => {
     window.location.href = "http://localhost:8000/auth/google/login";
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Register with:", formData);
+    try {
+      await registerWithEmail(formData.name, formData.email, formData.password);
+      console.log("Register success:", formData);
+      navigate("/login");
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
   };
 
   return (
@@ -20,33 +28,44 @@ const Register = () => {
         <p className="text-center text-gray-500 mb-8">Join LogoAI and start designing today</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <input
+              type="text"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+              placeholder="Enter your full name"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              required
+            />
+          </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-            <input 
-              type="email" 
+            <input
+              type="email"
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
               placeholder="you@example.com"
               value={formData.email}
-              onChange={(e) => setFormData({email: e.target.value})}
-              required
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-            <input 
-              type="password" 
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
-              placeholder="Create a strong password"
-              value={formData.password}
-              onChange={(e) => setFormData({password: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
             />
           </div>
 
-          <button 
-            type="submit" 
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <input
+              type="password"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+              placeholder="Create a strong password"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
             className="w-full bg-indigo-600 text-white p-3 rounded-lg font-bold hover:bg-indigo-700 transition shadow-md"
           >
             Create Free Account
@@ -59,7 +78,7 @@ const Register = () => {
           <div className="h-px bg-gray-200 flex-1"></div>
         </div>
 
-        <button 
+        <button
           onClick={handleGoogleLogin}
           className="w-full border border-gray-300 p-3 rounded-lg flex items-center justify-center gap-3 hover:bg-gray-50 transition font-medium text-gray-700"
         >

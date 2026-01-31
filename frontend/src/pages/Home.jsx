@@ -18,9 +18,15 @@ const Home = () => {
       
       <div className="mt-16 w-full max-w-4xl p-4 bg-white rounded-2xl shadow-2xl border border-gray-100">
         <div className="grid grid-cols-3 gap-4">
-            <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">AI Logo 1</div>
-            <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">AI Logo 2</div>
-            <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">AI Logo 3</div>
+            <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">
+              <img src="https://as2.ftcdn.net/v2/jpg/16/31/40/31/1000_F_1631403193_ECj6xejEQ6QCb9FK3ZKiiuTMTFDLmRwq.jpg" alt="Logo" />
+            </div>
+            <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">
+              <img src="https://as1.ftcdn.net/v2/jpg/03/08/95/98/1000_F_308959870_bcfVAs1VoJMXS9AUs3p8YaJrYL3NiuQA.jpg" alt="Logo" />
+            </div>
+            <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">
+              <img src="https://as1.ftcdn.net/v2/jpg/03/38/23/98/1000_F_338239852_ORDNOPSIoGcYeoQl9N2bkjYptzWD2O2G.jpg" alt="Logo" />
+            </div>
         </div>
       </div>
     </div>

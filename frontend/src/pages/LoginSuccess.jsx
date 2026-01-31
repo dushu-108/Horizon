@@ -12,9 +12,10 @@ const LoginSuccess = () => {
         const token = searchParams.get("token");
         const avatar = searchParams.get("avatar");
         const name = searchParams.get("name");
+        const email = searchParams.get("email");
 
         if (token) {
-            dispatch(login({ token, user: { name, avatar } }));
+            dispatch(login({ token, user: { name, avatar, email } }));
             navigate("/dashboard");
         } else {
             navigate("/login");

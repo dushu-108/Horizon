@@ -17,6 +17,16 @@ const ResultStep = () => {
     }
   }
 
+  const downloadLogo = () => {
+    if (!image) return;
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = `${title || 'logo'}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="flex flex-col items-center">
       <h2 className="text-2xl font-bold mb-6">Your Logo is Ready!</h2>
@@ -24,7 +34,8 @@ const ResultStep = () => {
         <img src={image} alt="Generated Logo" className="w-[400px] h-[400px] object-cover rounded-lg" />
       </div>
       <div className="flex gap-4">
-        <button onClick={() => generateLogo()} className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 font-bold">Generate New</button>
+        <button onClick={downloadLogo} className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 font-bold transition">Download</button>
+        <button onClick={() => generateLogo()} className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 font-bold transition">Generate New</button>
       </div>
     </div>
   );

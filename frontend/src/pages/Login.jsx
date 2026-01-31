@@ -19,11 +19,9 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await loginWithEmail(email, password);
-            const token = response.data.access_token;
+            const { access_token, user } = response.data;
 
-            const user = { name: email, email: email };
-
-            dispatch(login({ user, token }));
+            dispatch(login({ user, token: access_token }));
             navigate('/dashboard');
         } catch (error) {
             console.error("Login failed", error);
