@@ -20,15 +20,25 @@ CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
 REDIRECT_URI = os.getenv("GOOGLE_REDIRECT_URI")
 
-google_sso = GoogleSSO(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
+# Debug print to see what values are being used
+print(f"DEBUG: CLIENT_ID: {CLIENT_ID}")
+print(f"DEBUG: REDIRECT_URI: {REDIRECT_URI}")
+
+# GoogleSSO will be initialized per request to ensure fresh environment variables
 
 @router.get("/login")
 async def google_login():
+    # Initialize GoogleSSO for each request to ensure fresh env vars
+    google_sso = GoogleSSO(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
     async with google_sso:
-        return await google_sso.get_login_redirect()
+        redirect_response = await google_sso.get_login_redirect()
+        print(f"DEBUG: Google login redirect URL: {redirect_response.headers.get('location')}")
+        return redirect_response
 
 @router.get("/callback")
 async def google_callback(request: Request, db: Session = Depends(get_db)):
+    # Initialize GoogleSSO for each request to ensure fresh env vars
+    google_sso = GoogleSSO(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
     async with google_sso:
         user = await google_sso.verify_and_process(request)
     
@@ -50,3 +60,4 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
     frontend_base_url = "http://localhost:5173"
     frontend_url = f"{frontend_base_url}/login-success?token={access_token}&avatar={user.picture}&name={user.display_name}&email={user.email}"
     return RedirectResponse(url=frontend_url)
+    
