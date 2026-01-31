@@ -47,5 +47,5 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
     
     access_token = createAccessToken({"sub": user.email})
 
-    frontend_url = f"http://localhost:5173/login-success?token={access_token}&avatar={user.picture}&name={user.display_name}"
+    frontend_url = f"http://localhost:5173/login-success?token={access_token}&avatar={user.picture}&name={user.display_name}&email={user.email}"
     return RedirectResponse(url=frontend_url)
